@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div id="app">
+        <!--{{message}}-->
+        <span v-bind:title="message">Vue demo</span>
+        <h1 v-if="status">Yes</h1>
+        <h1 v-else>No</h1>
+
+        <li v-for="(item, index) in content">
+            {{index}}-{{item.msg}}
+        </li>
+
+        <button v-on:click="show">Click Me</button>
+    </div>
+
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+    <script>
+        let vue = new Vue({  // 7 大属性
+            el: "#app",
+            data: {
+                message: "Hello vue!",
+                status: true,
+                content: [
+                    {msg: "Java"},
+                    {msg: "Python"},
+                    {msg: "Golang"},
+                    {msg: "Rust"},
+                ]
+            },
+            methods: { // 方法必须定义在 method 内
+                show: function (event) {
+                    alert(this.message);
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
