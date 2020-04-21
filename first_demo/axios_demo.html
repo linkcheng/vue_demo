@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="vue" v-clock>
+        <div>{{info.name}}</div>
+        <div>{{info.url}}</div>
+        <a v-bind:href="info.url">{{info.name}}</a>
+    </div>
+
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let vue = new Vue({
+            el: "#vue",
+            data: {
+                info: {}
+            },
+            mounted(){
+                axios.get("data.json").then(response => (this.info = response.data))
+            }
+        });
+    </script>
+</body>
+</html>

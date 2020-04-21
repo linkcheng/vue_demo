@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <myli v-for="item in items" v-bind:content="item"></myli>
+
+    </div>
+
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+    <script>
+        Vue.component("myli", {
+            props: ["content"],  // 参数
+            template: "<li>{{content}}</li>",  // 模板
+        });
+
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                items: ['Java', 'Python', 'Golang']
+            }
+        });
+    </script>
+</body>
+</html>
