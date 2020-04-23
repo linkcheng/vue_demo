@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <p>编程语言列表</p>
+            <ul>
+                <li>Python</li>
+                <li>Java</li>
+                <li>Scala</li>
+            </ul>
+        </div>
+
+        <list>
+            <list-title slot="slot-title" v-bind:title="listTitle"></list-title>
+            <list-items slot="slot-items" v-for="(e, i) in listItems"
+                        :item="e" :index="i" v-on:remove="removeItem(i)"></list-items>
+        </list>
+    </div>
+
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+    <script>
+        Vue.component("list", {
+            template:
+                `<div>
+                    <slot name="slot-title"></slot>
+                    <ul>
+                        <slot name="slot-items"></slot>
+                    </ul>
+                </div>`
+        });
+
+        Vue.component("list-title", {
+            props: ["title"],
+            template: `<p>{{title}}</p>`,
+        });
+
+        Vue.component("list-items", {
+            props: ["item", "index"],
+            template: `<li>{{item}} <button @click="remove">delete</button></li> `,
+            methods: {
+                remove: function () {
+                    // 自定义事件分发
+                    this.$emit("remove", this.index);
+                }
+            }
+        });
+
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                listTitle: "JavaScript 列表",
+                listItems: ["Vue.js", "Node.js", "React.js"],
+            },
+            methods: {
+                removeItem: function (index) {
+                    console.log("删除 " + this.listItems[index] + " 成功");
+                    // splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目，
+                    // 其中 index 为添加/删除项目的位置，1 表示删除的数量
+                    this.listItems.splice(index, 1);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
