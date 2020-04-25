@@ -8,4 +8,5 @@
     4. 初始化项目，`vue init webpack vue_cli_demo`
     5. 安装包，`cd vue_cli_demo && npm install`
     6. 运行，`npm run dev`
-    
+3. webpack_demo
+    1. 安装包，`npm install webpack -g`，`npm install webpack-cli -g`
